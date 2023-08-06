@@ -24,7 +24,7 @@
 - 로그인
 
 # 연결 도메인
-- 링크 이동[https://port-9000-laravel-board-3prof2llkw3jzs1.sel4.cloudtype.app/]
+- [링크 이동](https://port-9000-laravel-board-3prof2llkw3jzs1.sel4.cloudtype.app/board).
 
 
 ### About Laravel
