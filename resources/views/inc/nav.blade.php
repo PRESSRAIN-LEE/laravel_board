@@ -1,3 +1,4 @@
+{{-- 상단메뉴 old버전 --}}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{url('/')}}">Learning Laravel</a>
