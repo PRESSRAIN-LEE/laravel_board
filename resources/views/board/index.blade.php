@@ -30,18 +30,17 @@
     <h3>게시판 목록</h3>
 
     <div class="row">
+      <div class="col-12">
         <form class="form-inline" action="{{ url('/board/search') }}" method="GET">
-        <div class="col">검색</div>
-        <div class="col-6">
           <input type="text" class="form-control" id="searchText" placeholder="검색어" name='searchText' value="{{ request('searchText') }}">
           <button type="submit" class="btn btn-primary">검색</button>
-        </div>
         </form>
+      </div>
     </div>
 
     <div class="row">
       <div class="col">
-        총 {{$boards->count()}}건 {{$boards->currentPage()}} / {{$boards->lastPage()}}페이지
+        총 {{$boards->total()}}건, {{$boards->currentPage()}} / {{$boards->lastPage()}}페이지
       </div>
     </div>
 
@@ -85,12 +84,14 @@
           </td>
           <td>
             @if ($board->board_file1)
-              <a href=''>파일</a>
+              <a href="/board/{{ $board->id }}/1/download">파일</a>
+              {{-- <a href="javascript:goFileDown({{ $board->id }}, 1)">파일</a> --}}
             @endif
           </td>
           <td>
             @if ($board->board_file2)
-              <a href=''>파일</a>
+            <a href="/board/{{ $board->id }}/2/download">파일</a>
+            {{-- <a href="javascript:goFileDown({{ $board->id }}, 2)">파일</a> --}}
             @endif
           </td>
           <td>{{ $board->board_read }}</td>
@@ -102,7 +103,10 @@
 
     <nav aria-label="Page navigation">
       <ul class="pagination justify-content-center">
-        {!! $boards->links() !!}
+        {{-- {!! $boards->links() !!} --}}
+        {{-- {!! $boards->links('pagination::bootstrap-4') !!} --}}
+        {!! $boards->appends(['searchText' => request('searchText')])->render() !!}
+        {{-- {!! $boards->appends(['searchText' => request('searchText'), 'searchText1' => 'aa'])->render() !!} --}}
       </ul>
     </nav>
 
@@ -132,6 +136,24 @@
               error: function(xhr, status, error) {
                   // 실패시 http status code 200 이 아닌 경우
                   console.log(xhr);
+              }
+          });
+      }
+
+      function goFileDown(pa1, pa2){
+        var url = "/board/" + pa1 + "/" + pa2 + "/download";
+          $.ajax({
+              type: "GET",
+              url: url,
+              dataType: "JSON",
+              success: function(result) {
+                  alert(result);
+              },
+              error: function(xhr, status, error) {
+                  // 실패시 http status code 200 이 아닌 경우
+                  alert(xhr);
+                  alert(status);
+                  alert(error);
               }
           });
       }

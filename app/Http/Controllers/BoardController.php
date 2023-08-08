@@ -332,4 +332,34 @@ class BoardController extends Controller
         return view('board.reply')
         ->with('board', $board);
     }
+
+    //첨부파일 다운로드
+    public function download(Request $request, $id, $idx)
+    {
+        $board = Board::find($id);
+//dd($request->idx);
+//return $request->idx;
+        switch($request->idx) {
+            case "1":
+                $path = storage_path("app/board/" . $board->board_file1);
+                if (!\File::exists($path)) {
+                    //return response()->json(['status' => false], 404);
+                    return("파일이 없습니다.");
+                }
+                return response()->download($path, $board->board_file1_ori);
+                break;
+            case "2":
+                $path = storage_path("app/board/" . $board->board_file2);
+                if (!\File::exists($path)) {
+                    return response()->json(['status' => false], 404);
+                    return("파일이 없습니다.");
+                }
+                return response()->download($path, $board->board_file2_ori);
+                break;
+            default:
+                //return ("C");
+        }
+        
+        //return response()->download(storage_path('app/board/' . $board->board_file1));
+    }
 }
