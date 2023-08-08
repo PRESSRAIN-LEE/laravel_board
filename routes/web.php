@@ -38,3 +38,6 @@ Route::get('/board/{id}/viewCnt', [BoardController::class, 'viewCnt']);	//상세
 
 Route::get('/board/{id}/edit', [BoardController::class, 'edit']);		//수정
 Route::put('/board/{id}/update', [BoardController::class, 'update']);	//수정 저장
+
+//Route::get('/board/{file_name}/download', [BoardController::class, 'download']);//->name('purchased.download');
+Route::get('/board/{id}/{idx}/download', [BoardController::class, 'download']);
