@@ -1,64 +1,82 @@
-@extends('layouts.forum')
+@extends('layouts.layout')
 
-@section('inside_head_tag')
-	<script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
+@section('head_tag')
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
 @endsection
 
-@section('content')
-<form name='frm' id='frm' method='POST' enctype="multipart/form-data">
-	{{-- <form method="POST" name='frm' id='frm' action='/board/store' aria-label="{{ __('create') }}" enctype="multipart/form-data"> --}}
-	@csrf
-	{{-- @method('POST') --}}
-	<input type="HIDDEN" class="" name='member_seq' id='member_seq' value='{{$board -> member_seq}}'>
-	<input type="HIDDEN" class="" name='board_content' id='board_content'>
-	<input type="HIDDEN" class="" name='grp' id='grp' value="{{ $board -> grp}}">
-	<input type="HIDDEN" class="" name='sort' id='sort' value="{{ $board -> sort}}">
-	<input type="HIDDEN" class="" name='depth' id='depth' value="{{ $board -> depth}}">
+@section('content-fluid')
+<div class="row">
+	{{-- 좌측 메뉴 --}}
+	@include('inc.leftMenu')
+	{{-- 좌측 메뉴 끝--}}
 
-	<div class="container">
-		<div class="row mt-5">
-			<div class="col-auto">
-				<label>이름</label>
-				<input type="text" class="form-control" name='member_name' id='member_name' value='{{$board -> member_name}}'>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-6">
-				<label>제목</label>
-				<input type="text" class="form-control" name='board_title' id='board_title' value='{{$board -> board_title}}'>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-12">
-				<label>내용</label>
-				<div id="editor">{!!$board -> board_content!!}</div>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-auto">
-				<label>첨부파일1</label>
-				<input type="file" class="form-control" name='board_file1' id='board_file1'>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-auto">
-				<label>첨부파일2</label>
-				<input type="file" class="form-control" name='board_file2' id='board_file2'>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-12">
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-					<button class="btn btn-sm btn-success" type='button' id='btnSave'>저장(A)</button>
-					<button class="btn btn-sm btn-default" type='button' id='btnList'>목록</button>
-				</div>
+	{{-- 우측 본문--}}
+	<div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<h3>게시판 글쓰기</h3>
+		<div class="row">
+			<div class="col-12 mt-5">
+				<form name='frm' id='frm' method='POST' enctype="multipart/form-data">
+					{{-- <form method="POST" name='frm' id='frm' action='/board/store' aria-label="{{ __('create') }}" enctype="multipart/form-data"> --}}
+					@csrf
+					{{-- @method('POST') --}}
+					<input type="HIDDEN" class="" name='member_seq' id='member_seq' value='{{$board -> member_seq}}'>
+					<input type="HIDDEN" class="" name='board_content' id='board_content'>
+					<input type="HIDDEN" class="" name='grp' id='grp' value="{{ $board -> grp}}">
+					<input type="HIDDEN" class="" name='sort' id='sort' value="{{ $board -> sort}}">
+					<input type="HIDDEN" class="" name='depth' id='depth' value="{{ $board -> depth}}">
+
+					<div class="container">
+						<div class="row mt-5">
+							<div class="col-auto">
+								<label>이름</label>
+								<input type="text" class="form-control" name='member_name' id='member_name' value='{{$board -> member_name}}'>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-6">
+								<label>제목</label>
+								<input type="text" class="form-control" name='board_title' id='board_title' value='{{$board -> board_title}}'>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-12">
+								<label>내용</label>
+								<div id="editor">{!!$board -> board_content!!}</div>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-auto">
+								<label>첨부파일1</label>
+								<input type="file" class="form-control" name='board_file1' id='board_file1'>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-auto">
+								<label>첨부파일2</label>
+								<input type="file" class="form-control" name='board_file2' id='board_file2'>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-12">
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+									<button class="btn btn-sm btn-success mx-3" type='button' id='btnSave'>저장(A)</button>
+									<button class="btn btn-sm btn-primary" type='button' id='btnList'>목록</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-</form>
+</div>
+
+{{-- footer 메뉴 --}}
+@include('inc.footer')
+{{-- footer 메뉴 끝--}}
 @endsection
 
-@section('before_body_end_tag')
+@section('body_end_tag')
 	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
 	<script>
@@ -91,17 +109,17 @@
 			
 			$.ajax({
 				type: 'POST',
-				url: '/board/store',
+				url: '/board/update',
 				data: formData,
 				contentType: false,
 				processData: false,
 				success: function(response){
-					console.log(response);
+					//console.log(response);
 					//$('#fileSaveName').val(response);
 				},
 				error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
 					//console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-					console.log('code:'+request.status+'\n'+'error:'+error);
+					//console.log('code:'+request.status+'\n'+'error:'+error);
 				}
 			});
 			
