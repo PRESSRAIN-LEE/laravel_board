@@ -10,21 +10,26 @@
 ## 개발 완료 목록
 - 게시판 목록
 - 게시판 페이징
-- 답변(Reply) 기능
+- 글 쓰기
+- 답변(Reply)
 
 ## 진행 중인 목록
-- Comment(댓글) 기능
+- Comment(댓글) 기능(목록, 쓰기, 삭제...)
 
 ## 진행 예정 목록
 - 글 삭제1: 리스트(체크박스)
 - 글 삭제2: 상세페이지(삭제 버튼)
 - 글 수정
-- 파일 다운로드 기능
+- 파일 다운로드
+- 파일 삭제
 - 검색 기능
-- 로그인
+- 로그인(관리자)
+- 로그인 정보 수정
+- 회원가입은 front-end에서...
 
 # 연결 도메인
 - [링크 이동](https://port-9000-laravel-board-3prof2llkw3jzs1.sel4.cloudtype.app/board).
+
 
 
 ### About Laravel
@@ -40,8 +45,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
-
-
 
 ## License
 
